@@ -1,50 +1,38 @@
-import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
-import { Line, Row, Text } from "@once-ui-system/core";
+import type { About, Blog, Contact, Home, NavigationItem, Person, Social, Work } from "@/types";
+import { Text } from "@once-ui-system/core";
 
 const person: Person = {
-  firstName: "Selene",
-  lastName: "Yu",
-  name: `Selene Yu`,
-  role: "Design Engineer",
-  avatar: "/images/avatar.jpg",
-  email: "example@gmail.com",
-  location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Bahasa"], // optional: Leave the array empty if you don't want to display languages
-  locale: "en", // BCP 47 language tag for the HTML lang attribute, e.g., 'en', 'ja', 'zh-TW'
-};
-
-const newsletter: Newsletter = {
-  display: true,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
-  description: <>My weekly newsletter about creativity and engineering</>,
+  firstName: "Sam",
+  lastName: "McNab",
+  name: "Sam McNab",
+  role: "Paramedic, educator and software builder",
+  avatar: "/images/avatar-sam-mcnab.webp",
+  avatarAlt: "Sam McNab wearing a blue shirt",
+  email: "sam@sammcnab.co.uk",
+  location: "High Wycombe, Buckinghamshire, UK",
+  timeZone: "Europe/London",
+  languages: ["English"],
+  locale: "en-GB",
+  url: "https://sammcnab.co.uk",
 };
 
 const social: Social = [
-  // Links are automatically displayed.
-  // Import new icons in /once-ui/icons.ts
-  // Set essentials: true for links you want to show on the about page
   {
     name: "GitHub",
     icon: "github",
-    link: "https://github.com/once-ui-system",
+    link: "https://github.com/smcnab1",
     essential: true,
   },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
+    link: "https://www.linkedin.com/in/sammcnab/",
     essential: true,
   },
   {
-    name: "Instagram",
-    icon: "instagram",
-    link: "https://www.instagram.com/once_ui/",
-    essential: false,
-  },
-  {
-    name: "Threads",
-    icon: "threads",
-    link: "https://www.threads.com/@once_ui",
+    name: "ORCID",
+    icon: "orcid",
+    link: "https://orcid.org/0009-0009-4568-9853",
     essential: true,
   },
   {
@@ -55,39 +43,70 @@ const social: Social = [
   },
 ];
 
+const navigation: NavigationItem[] = [
+  { path: "/", label: "Home", icon: "home" },
+  { path: "/about", label: "About", icon: "person" },
+  { path: "/work", label: "Work", icon: "grid" },
+  { path: "/blog", label: "Writing", icon: "book" },
+  { path: "/contact", label: "Contact", icon: "email" },
+];
+
 const home: Home = {
   path: "/",
-  image: "/images/og/home.jpg",
+  image: person.avatar,
   label: "Home",
-  title: `${person.name}'s Portfolio`,
-  description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building bridges between design and code</>,
-  featured: {
-    display: true,
-    title: (
-      <Row gap="12" vertical="center">
-        <strong className="ml-4">Once UI</strong>{" "}
-        <Line background="brand-alpha-strong" vert height="20" />
-        <Text marginRight="4" onBackground="brand-medium">
-          Featured work
-        </Text>
-      </Row>
-    ),
-    href: "/work/building-once-ui-a-customizable-design-system",
-  },
+  title: "Sam McNab — Paramedic, educator and software builder",
+  description:
+    "Sam McNab connects clinical practice, healthcare simulation, inclusive education and practical software development.",
+  eyebrow: "Paramedic · Educator · Software Builder",
+  headline: <>I build better ways to learn, simulate and work.</>,
   subline: (
     <>
-      I'm {person.firstName}, a {person.role.toLowerCase()} at{" "}
-      <Text as="span" size="xl" weight="strong">ONCE UI</Text>, where I craft intuitive <br /> user experiences. After hours, I build my own projects.
+      I&apos;m Sam McNab — a registered paramedic and Senior Lecturer in Simulation &amp; Immersive
+      Technologies. I design realistic healthcare learning, build practical software, and advocate
+      for systems that work better for neurodivergent people.
     </>
   ),
+  actions: [
+    { label: "View my work", href: "/work", primary: true },
+    { label: "About me", href: "/about" },
+  ],
+  secondaryLinks: [
+    { label: "SimHQ", href: "https://simhq.app", icon: "arrowUpRightFromSquare" },
+    { label: "Writing", href: "/blog", icon: "book" },
+    { label: "GitHub", href: "https://github.com/smcnab1", icon: "github" },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/sammcnab/",
+      icon: "linkedin",
+    },
+  ],
+  focusAreas: [
+    {
+      title: "Simulation and immersive learning",
+      description:
+        "Realistic, inclusive learning that helps healthcare professionals rehearse difficult work safely.",
+    },
+    {
+      title: "Practical software",
+      description:
+        "Tools that remove friction from simulation operations, education and everyday workflows.",
+    },
+    {
+      title: "Neuroinclusive systems",
+      description:
+        "Teaching, technology and working practices designed with different ways of thinking in mind.",
+    },
+  ],
+  credibility: ["Registered paramedic", "Senior Lecturer", "Founder of SimHQ"],
 };
 
 const about: About = {
   path: "/about",
   label: "About",
-  title: `About – ${person.name}`,
-  description: `Meet ${person.name}, ${person.role} from ${person.location}`,
+  title: "About Sam McNab",
+  description:
+    "Sam McNab is a registered paramedic, simulation educator, neurodiversity advocate and software builder based in Buckinghamshire.",
   tableOfContent: {
     display: true,
     subItems: false,
@@ -95,140 +114,121 @@ const about: About = {
   avatar: {
     display: true,
   },
-  calendar: {
-    display: true,
-    link: "https://cal.com",
-  },
   intro: {
     display: true,
     title: "Introduction",
     description: (
       <>
-        {person.firstName} is a {person.location.split("/")[1]?.replace("_", " ")}-based {person.role.toLowerCase()} with a passion for transforming complex challenges
-        into simple, elegant design solutions. Their work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        <Text as="p">
+          I work where clinical practice, higher education and technology meet. My starting point is
+          usually the same: understand the real problem, reduce unnecessary friction, and build
+          something people can use.
+        </Text>
+        <Text as="p">
+          Today, that means leading simulation and immersive learning at the University of West
+          London, building SimHQ, contributing to work around healthcare AI, and advocating for
+          neurodivergent staff and students.
+        </Text>
       </>
     ),
   },
   work: {
-    display: true, // set to false to hide this section
-    title: "Work Experience",
+    display: true,
+    title: "Selected roles",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "University of West London",
+        timeframe: "2025–present",
+        role: "Senior Lecturer in Simulation & Immersive Technologies",
         achievements: [
-          <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
-          </>,
-          <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
-          </>,
-        ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
-            width: 16,
-            height: 9,
-          },
+          "Course leadership for the MSc Simulated Practice Education, alongside teaching, curriculum design and personal tutoring across healthcare programmes.",
+          "Designs high-fidelity, scenario-based and immersive learning for undergraduate and postgraduate learners.",
+          "Leads and contributes to work around generative AI, inclusive education and neurodivergent staff experience within the College of Nursing, Midwifery and Healthcare.",
         ],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "SimHQ",
+        timeframe: "Current",
+        role: "Founder and builder",
         achievements: [
-          <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
-          </>,
-          <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
-          </>,
+          "Building a modular platform for the practical work behind healthcare simulation centres, including room operations, support and asset workflows.",
+          "Combines product thinking, software development and first-hand simulation experience to keep the tools grounded in real operational needs.",
         ],
-        images: [],
+      },
+      {
+        company: "Clinical and instructional practice",
+        timeframe: "2016–present",
+        role: "Registered paramedic, former ambulance clinician and military instructor",
+        achievements: [
+          "Trained as a Combat Medical Technician before completing a DipHE in Paramedic Practice and working in ambulance-service and independent clinical settings.",
+          "Clinical practice and instructional experience continue to shape how I design simulation, software and education.",
+        ],
       },
     ],
   },
   studies: {
-    display: true, // set to false to hide this section
-    title: "Studies",
+    display: true,
+    title: "Education",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
+        name: "MSc Paramedic: Practice Development",
+        description: "Current postgraduate study.",
       },
       {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
+        name: "Professional Academic Practice",
+        description: "Postgraduate study at the University of West London.",
+      },
+      {
+        name: "DipHE Paramedic Practice",
+        description: "University of Cumbria, completed in 2021.",
       },
     ],
   },
   technical: {
-    display: true, // set to false to hide this section
-    title: "Technical skills",
+    display: true,
+    title: "Areas of practice",
     skills: [
       {
-        title: "Figma",
-        description: (
-          <>Able to prototype in Figma with Once UI with unnatural speed.</>
-        ),
+        title: "Healthcare simulation",
+        description:
+          "Scenario design, facilitation, high-fidelity simulation, immersive technologies and simulation-based curriculum design.",
+        tags: [{ name: "Scenario design" }, { name: "Debriefing" }, { name: "Immersive learning" }],
+      },
+      {
+        title: "Inclusive education",
+        description:
+          "Neuro-affirming teaching, accessible learning design and practical changes that make systems easier to navigate.",
         tags: [
-          {
-            name: "Figma",
-            icon: "figma",
-          },
-        ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
+          { name: "Neurodiversity" },
+          { name: "Universal design" },
+          { name: "Staff advocacy" },
         ],
       },
       {
-        title: "Next.js",
-        description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
-        ),
-        tags: [
-          {
-            name: "JavaScript",
-            icon: "javascript",
-          },
-          {
-            name: "Next.js",
-            icon: "nextjs",
-          },
-          {
-            name: "Supabase",
-            icon: "supabase",
-          },
-        ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
+        title: "Software and AI",
+        description:
+          "Web applications, workflow automation and careful use of generative AI for education and simulation.",
+        tags: [{ name: "Product development" }, { name: "Automation" }, { name: "Generative AI" }],
+      },
+    ],
+  },
+  contributions: {
+    display: true,
+    title: "Professional contributions",
+    items: [
+      {
+        title: "Healthcare AI",
+        description: "Member of the HCPC AI Expert Panel and AI lead within CNMH.",
+      },
+      {
+        title: "Professional communities",
+        description:
+          "Contributions to College of Paramedics and ASPiH special-interest groups, peer review, and simulation education communities.",
+      },
+      {
+        title: "Academic development",
+        description:
+          "Advance HE mentoring and assessment, with a focus on reflective and inclusive practice.",
       },
     ],
   },
@@ -236,71 +236,32 @@ const about: About = {
 
 const blog: Blog = {
   path: "/blog",
-  label: "Blog",
-  title: "Writing about design and tech...",
-  description: `Read what ${person.name} has been up to recently`,
-  // Create new blog posts by adding a new .mdx file to app/blog/posts
-  // All posts will be listed on the /blog route
+  label: "Writing",
+  title: "Writing and publications",
+  description:
+    "Selected publications, presentations and notes by Sam McNab on simulation, AI and neuroinclusive education.",
 };
 
 const work: Work = {
   path: "/work",
   label: "Work",
-  title: `Projects – ${person.name}`,
-  description: `Design and dev projects by ${person.name}`,
-  // Create new project pages by adding a new .mdx file to app/blog/posts
-  // All projects will be listed on the /home and /work routes
+  title: "Selected work",
+  description:
+    "Selected projects and programmes spanning healthcare simulation, inclusive education and practical software.",
+  introduction:
+    "A small set of projects that show how I connect clinical practice, education and technology. Where formal outcome data is not public, I describe the work and its current status plainly.",
 };
 
-const gallery: Gallery = {
-  path: "/gallery",
-  label: "Gallery",
-  title: `Photo gallery – ${person.name}`,
-  description: `A photo collection by ${person.name}`,
-  // Images by https://lorant.one
-  // These are placeholder images, replace with your own
-  images: [
-    {
-      src: "/images/gallery/horizontal-1.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-4.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-3.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-1.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/vertical-2.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-2.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/horizontal-4.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-3.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-  ],
+const contact: Contact = {
+  path: "/contact",
+  label: "Contact",
+  title: "Contact Sam McNab",
+  description:
+    "Contact Sam McNab about healthcare simulation, education, speaking, collaboration or software projects.",
+  introduction:
+    "The simplest way to reach me is by email. You can also find my current work and professional profiles below.",
+  availability:
+    "I am happy to hear about thoughtful collaborations across healthcare simulation, education, neuroinclusion and practical software.",
 };
 
-export { person, social, newsletter, home, about, blog, work, gallery };
+export { person, social, navigation, home, about, blog, work, contact };

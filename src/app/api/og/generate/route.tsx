@@ -1,26 +1,11 @@
 import { ImageResponse } from "next/og";
-import { baseURL, person } from "@/resources";
+import { person } from "@/resources";
 
 export const runtime = "nodejs";
 
 export async function GET(request: Request) {
-  let url = new URL(request.url);
-  let title = url.searchParams.get("title") || "Portfolio";
-
-  async function loadGoogleFont(font: string) {
-    const url = `https://fonts.googleapis.com/css2?family=${font}`;
-    const css = await (await fetch(url)).text();
-    const resource = css.match(/src: url\((.+)\) format\('(opentype|truetype)'\)/);
-
-    if (resource) {
-      const response = await fetch(resource[1]);
-      if (response.status == 200) {
-        return await response.arrayBuffer();
-      }
-    }
-
-    throw new Error("failed to load font data");
-  }
+  const url = new URL(request.url);
+  const title = (url.searchParams.get("title") || "Portfolio").slice(0, 140);
 
   return new ImageResponse(
     <div
@@ -38,7 +23,7 @@ export async function GET(request: Request) {
           flexDirection: "column",
           justifyContent: "center",
           gap: "4rem",
-          fontStyle: "normal",
+          fontFamily: "Arial, sans-serif",
           color: "white",
         }}
       >
@@ -63,7 +48,10 @@ export async function GET(request: Request) {
           }}
         >
           <img
-            src={baseURL + person.avatar}
+            src={new URL("/images/avatar-og.png", request.url).toString()}
+            alt=""
+            width={192}
+            height={192}
             style={{
               width: "12rem",
               height: "12rem",
@@ -106,13 +94,6 @@ export async function GET(request: Request) {
     {
       width: 1280,
       height: 720,
-      fonts: [
-        {
-          name: "Geist",
-          data: await loadGoogleFont("Geist:wght@400"),
-          style: "normal",
-        },
-      ],
     },
   );
 }

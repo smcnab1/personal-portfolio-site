@@ -1,23 +1,16 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 export function ScrollToHash() {
-  const router = useRouter();
-
   useEffect(() => {
-    // Get the hash from the URL
-    const hash = window.location.hash;
-    if (hash) {
-      // Remove the '#' symbol
-      const id = hash.replace("#", "");
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
+    const id = window.location.hash.replace("#", "");
+    const element = id ? document.getElementById(id) : null;
+    if (element) {
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      element.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
     }
-  }, [router]);
+  }, []);
 
   return null;
 }

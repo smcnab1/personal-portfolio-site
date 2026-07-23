@@ -1,46 +1,46 @@
-import { Column, Heading, Meta, Schema } from "@once-ui-system/core";
-import { Mailchimp } from "@/components";
+import { JsonLd } from "@/components";
 import { Posts } from "@/components/blog/Posts";
-import { baseURL, blog, person, newsletter } from "@/resources";
+import { blog, person } from "@/resources";
+import { generatePageMetadata } from "@/utils/metadata";
+import { Column, Heading, SmartLink, Text } from "@once-ui-system/core";
 
 export async function generateMetadata() {
-  return Meta.generate({
-    title: blog.title,
-    description: blog.description,
-    baseURL: baseURL,
-    image: `/api/og/generate?title=${encodeURIComponent(blog.title)}`,
-    path: blog.path,
-  });
+  return generatePageMetadata(blog);
 }
 
-export default function Blog() {
+export default function WritingPage() {
   return (
-    <Column maxWidth="m" paddingTop="24">
-      <Schema
-        as="blogPosting"
-        baseURL={baseURL}
-        title={blog.title}
-        description={blog.description}
-        path={blog.path}
-        image={`/api/og/generate?title=${encodeURIComponent(blog.title)}`}
-        author={{
-          name: person.name,
-          url: `${baseURL}/blog`,
-          image: `${baseURL}${person.avatar}`,
+    <Column maxWidth="m" fillWidth paddingTop="24" gap="xl">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: blog.title,
+          description: blog.description,
+          url: `${person.url}${blog.path}`,
+          author: {
+            "@type": "Person",
+            name: person.name,
+            url: person.url,
+          },
         }}
       />
-      <Heading marginBottom="l" variant="heading-strong-xl" marginLeft="24">
-        {blog.title}
-      </Heading>
-      <Column fillWidth flex={1} gap="40">
-        <Posts range={[1, 1]} thumbnail />
-        <Posts range={[2, 3]} columns="2" thumbnail direction="column" />
-        <Mailchimp marginBottom="l" />
-        <Heading as="h2" variant="heading-strong-xl" marginLeft="l">
-          Earlier posts
+      <Column maxWidth="s" gap="12" paddingX="l">
+        <Text variant="label-strong-s" onBackground="brand-weak">
+          Publications, presentations and notes
+        </Text>
+        <Heading as="h1" variant="display-strong-l">
+          {blog.title}
         </Heading>
-        <Posts range={[4]} columns="2" />
+        <Text variant="heading-default-m" onBackground="neutral-weak">
+          I write and speak about healthcare simulation, generative AI and what inclusive education
+          looks like in practice.
+        </Text>
+        <SmartLink href="/api/rss" prefixIcon="book">
+          Subscribe via RSS
+        </SmartLink>
       </Column>
+      <Posts columns="2" thumbnail direction="column" />
     </Column>
   );
 }

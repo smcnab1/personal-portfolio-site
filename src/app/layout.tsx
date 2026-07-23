@@ -2,28 +2,39 @@ import "@once-ui-system/core/css/styles.css";
 import "@once-ui-system/core/css/tokens.css";
 import "@/resources/custom.css";
 
-import classNames from "classnames";
-
+import { Footer, Header, JsonLd, Providers } from "@/components";
+import { dataStyle, effects, fonts, home, person, social, style } from "@/resources";
+import { generatePageMetadata } from "@/utils/metadata";
 import {
   Background,
   Column,
   Flex,
-  Meta,
-  opacity,
+  type Opacity,
   RevealFx,
-  SpacingToken,
+  type SpacingToken,
 } from "@once-ui-system/core";
-import { Footer, Header, RouteGuard, Providers } from "@/components";
-import { baseURL, effects, fonts, style, dataStyle, home, person } from "@/resources";
+import classNames from "classnames";
 
 export async function generateMetadata() {
-  return Meta.generate({
+  const metadata = generatePageMetadata({
     title: home.title,
     description: home.description,
-    baseURL: baseURL,
     path: home.path,
     image: home.image,
   });
+
+  return {
+    ...metadata,
+    title: {
+      default: home.title,
+      template: `%s — ${person.name}`,
+    },
+    manifest: "/manifest.webmanifest",
+    icons: {
+      icon: "/images/favicon.ico",
+      shortcut: "/images/favicon.ico",
+    },
+  };
 }
 
 export default async function RootLayout({
@@ -35,7 +46,7 @@ export default async function RootLayout({
     <Flex
       suppressHydrationWarning
       as="html"
-      lang={person.locale ?? "en"}
+      lang={person.locale}
       fillWidth
       className={classNames(
         fonts.heading.variable,
@@ -47,14 +58,13 @@ export default async function RootLayout({
       <head>
         <script
           id="theme-init"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: The script is generated only from trusted local theme configuration.
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
                 try {
                   const root = document.documentElement;
                   const defaultTheme = 'system';
-                  
-                  // Set defaults from config
                   const config = ${JSON.stringify({
                     brand: style.brand,
                     accent: style.accent,
@@ -67,35 +77,25 @@ export default async function RootLayout({
                     scaling: style.scaling,
                     "viz-style": dataStyle.variant,
                   })};
-                  
-                  // Apply default values
+
                   Object.entries(config).forEach(([key, value]) => {
                     root.setAttribute('data-' + key, value);
                   });
-                  
-                  // Resolve theme
+
                   const resolveTheme = (themeValue) => {
-                    if (!themeValue || themeValue === 'system') {
+                    if (!themeValue || themeValue === defaultTheme) {
                       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
                     }
                     return themeValue;
                   };
-                  
-                  // Apply saved theme
-                  const savedTheme = localStorage.getItem('data-theme');
-                  const resolvedTheme = resolveTheme(savedTheme);
-                  root.setAttribute('data-theme', resolvedTheme);
-                  
-                  // Apply any saved style overrides
-                  const styleKeys = Object.keys(config);
-                  styleKeys.forEach(key => {
+
+                  root.setAttribute('data-theme', resolveTheme(localStorage.getItem('data-theme')));
+
+                  Object.keys(config).forEach((key) => {
                     const value = localStorage.getItem('data-' + key);
-                    if (value) {
-                      root.setAttribute('data-' + key, value);
-                    }
+                    if (value) root.setAttribute('data-' + key, value);
                   });
-                } catch (e) {
-                  console.error('Failed to initialize theme:', e);
+                } catch {
                   document.documentElement.setAttribute('data-theme', 'dark');
                 }
               })();
@@ -113,6 +113,27 @@ export default async function RootLayout({
           padding="0"
           horizontal="center"
         >
+          <a className="skip-link" href="#main-content">
+            Skip to main content
+          </a>
+          <JsonLd
+            data={{
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: person.name,
+              url: person.url,
+              image: `${person.url}${person.avatar}`,
+              email: `mailto:${person.email}`,
+              jobTitle: person.role,
+              homeLocation: {
+                "@type": "Place",
+                name: person.location,
+              },
+              sameAs: social
+                .filter((item) => item.link.startsWith("https://"))
+                .map((item) => item.link),
+            }}
+          />
           <RevealFx fill position="absolute">
             <Background
               mask={{
@@ -123,7 +144,7 @@ export default async function RootLayout({
               }}
               gradient={{
                 display: effects.gradient.display,
-                opacity: effects.gradient.opacity as opacity,
+                opacity: effects.gradient.opacity as Opacity,
                 x: effects.gradient.x,
                 y: effects.gradient.y,
                 width: effects.gradient.width,
@@ -134,20 +155,20 @@ export default async function RootLayout({
               }}
               dots={{
                 display: effects.dots.display,
-                opacity: effects.dots.opacity as opacity,
+                opacity: effects.dots.opacity as Opacity,
                 size: effects.dots.size as SpacingToken,
                 color: effects.dots.color,
               }}
               grid={{
                 display: effects.grid.display,
-                opacity: effects.grid.opacity as opacity,
+                opacity: effects.grid.opacity as Opacity,
                 color: effects.grid.color,
                 width: effects.grid.width,
                 height: effects.grid.height,
               }}
               lines={{
                 display: effects.lines.display,
-                opacity: effects.lines.opacity as opacity,
+                opacity: effects.lines.opacity as Opacity,
                 size: effects.lines.size as SpacingToken,
                 thickness: effects.lines.thickness,
                 angle: effects.lines.angle,
@@ -157,9 +178,18 @@ export default async function RootLayout({
           </RevealFx>
           <Flex fillWidth minHeight="16" s={{ hide: true }} />
           <Header />
-          <Flex zIndex={0} fillWidth padding="l" horizontal="center" flex={1}>
+          <Flex
+            as="main"
+            id="main-content"
+            tabIndex={-1}
+            zIndex={0}
+            fillWidth
+            padding="l"
+            horizontal="center"
+            flex={1}
+          >
             <Flex horizontal="center" fillWidth minHeight="0">
-              <RouteGuard>{children}</RouteGuard>
+              {children}
             </Flex>
           </Flex>
           <Footer />
