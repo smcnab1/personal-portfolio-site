@@ -7,6 +7,8 @@ The site presents selected work across healthcare simulation, higher education, 
 and practical software. Personal details, social links and navigation are maintained centrally;
 project and writing detail pages are stored as structured MDX.
 
+![Sam McNab portfolio home page](docs/portfolio-home.jpg)
+
 ## Development
 
 ```bash
