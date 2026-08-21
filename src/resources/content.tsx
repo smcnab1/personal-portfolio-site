@@ -362,15 +362,33 @@ const about: About = {
     institutions: [
       {
         name: "MSc Paramedic: Practice Development",
-        description: "Current postgraduate study - because apparently I needed another project.",
+        description:
+          "University of Cumbria · Sep 2024–Sep 2027 · Ongoing postgraduate study in clinical reasoning, evidence-based paramedic practice and transformational leadership.",
       },
       {
-        name: "Professional Academic Practice",
-        description: "Postgraduate study completed at the University of West London.",
+        name: "PgCert Professional Academic Practice",
+        description:
+          "University of West London · Sep 2023–Aug 2024 · Postgraduate study in higher education pedagogy, curriculum design, assessment and research-informed teaching.",
       },
       {
         name: "DipHE Paramedic Practice",
-        description: "University of Cumbria, completed in 2021.",
+        description:
+          "University of Cumbria · Nov 2020–Dec 2021 · Completed with distinction, providing the clinical and academic foundations for registered paramedic practice.",
+      },
+      {
+        name: "Fellow of the Higher Education Academy (FHEA)",
+        description:
+          "Higher Education Academy · Recognised since Nov 2024 for teaching and learning practice in higher education.",
+      },
+      {
+        name: "Registered Paramedic",
+        description:
+          "Health and Care Professions Council · Registered since Feb 2022, underpinning current clinical practice.",
+      },
+      {
+        name: "CS50: Introduction to Computer Science",
+        description:
+          "Harvard John A. Paulson School of Engineering and Applied Sciences · Dec 2023–Feb 2024 · Foundation in algorithms, data structures, software engineering and web development.",
       },
     ],
   },
@@ -379,26 +397,44 @@ const about: About = {
     title: "Things I know a bit about",
     skills: [
       {
-        title: "Healthcare simulation",
+        title: "Healthcare simulation and immersive learning",
         description:
-          "Designing and delivering scenarios, high-fidelity simulation, immersive experiences and simulation-based curricula that have a clear reason for existing.",
-        tags: [{ name: "Scenario design" }, { name: "Debriefing" }, { name: "Immersive learning" }],
-      },
-      {
-        title: "Inclusive education",
-        description:
-          "Neuro-affirming teaching, accessible learning design and practical changes that make education and work easier to navigate.",
+          "Designing simulation-based curricula, immersive scenarios and quality-improvement work that connects educational purpose with realistic clinical practice.",
         tags: [
-          { name: "Neurodiversity" },
-          { name: "Universal design" },
-          { name: "Staff advocacy" },
+          { name: "Healthcare simulation" },
+          { name: "Scenario design" },
+          { name: "Immersive learning" },
         ],
       },
       {
-        title: "Software and AI",
+        title: "Paramedic and emergency care",
         description:
-          "Web applications, workflow automation and sensible uses of generative AI - with slightly less enthusiasm for using AI where a normal button would do.",
-        tags: [{ name: "Product development" }, { name: "Automation" }, { name: "Generative AI" }],
+          "Bringing registered paramedic practice, emergency response and clinical decision-making into education, training and software design.",
+        tags: [
+          { name: "Paramedic practice" },
+          { name: "Clinical decision-making" },
+          { name: "Emergency response" },
+        ],
+      },
+      {
+        title: "Higher education and neuroinclusion",
+        description:
+          "Leading curriculum development, mentoring educators and shaping neuro-affirming learning and working environments.",
+        tags: [
+          { name: "Curriculum development" },
+          { name: "Academic mentoring" },
+          { name: "Neuroinclusive design" },
+        ],
+      },
+      {
+        title: "Software, responsible AI and cybersecurity",
+        description:
+          "Building practical software, contributing to responsible AI standards and developing cybersecurity knowledge through current professional practice and study.",
+        tags: [
+          { name: "Software development" },
+          { name: "Responsible AI" },
+          { name: "Cybersecurity" },
+        ],
       },
     ],
   },
@@ -407,19 +443,34 @@ const about: About = {
     title: "Elsewhere",
     items: [
       {
-        title: "Healthcare AI",
+        title: "Responsible AI in professional education",
         description:
-          "Member of the HCPC AI Expert Panel and AI lead within the College of Nursing, Midwifery and Healthcare.",
+          "Contributed to the HCPC expert panel review of the Standards of Education and Training, focusing on AI literacy, academic integrity and implementable safeguards from Dec 2024 to Dec 2025.",
       },
       {
-        title: "Professional communities",
+        title: "Palliative and end-of-life care",
         description:
-          "Contributes to College of Paramedics and ASPiH special-interest groups, peer review and the wider simulation education community.",
+          "Founding member of the College of Paramedics PEOLC special-interest group since Jun 2022, contributing to policy, professional education and practice development.",
       },
       {
-        title: "Academic development",
+        title: "Academic peer review",
         description:
-          "Advance HE mentoring and assessment, focused on reflective, inclusive practice that remains useful once the paperwork is finished.",
+          "Reviews manuscripts for the International Journal of Healthcare Simulation and the Journal of Public Health and Community Medicine, providing constructive, evidence-based recommendations.",
+      },
+      {
+        title: "Neurodivergent staff advocacy",
+        description:
+          "Leads the University of West London Neurodivergent Staff Network, working on institutional accessibility, policy and neuro-affirming practice since Oct 2025.",
+      },
+      {
+        title: "Fellowship mentoring and assessment",
+        description:
+          "Mentors Advance UWL applicants and serves on assessment panels for Associate Fellowship and Fellowship of Advance HE since Feb 2026.",
+      },
+      {
+        title: "Scholarship and professional speaking",
+        description:
+          "Presented work during 2024 and 2025 on ADHD, neuroinclusive education, responsible AI and simulated electronic patient records in healthcare education.",
       },
     ],
   },
