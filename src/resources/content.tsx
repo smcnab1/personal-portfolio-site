@@ -62,8 +62,10 @@ const home: Home = {
   headline: <>I build better ways to learn, simulate and work.</>,
   subline: (
     <>
-      I&apos;m <strong>Sam</strong>, a registered <strong>paramedic</strong>, <strong>simulation lecturer</strong> and serial fixer of things that probably shouldn&apos;t have been broken in the first place. 
-      I create immersive healthcare learning, build practical software and push for systems that work better for neurospicy brains.
+      I&apos;m <strong>Sam</strong>, a registered <strong>paramedic</strong>,{" "}
+      <strong>simulation lecturer</strong> and serial fixer of things that probably shouldn&apos;t
+      have been broken in the first place. I create immersive healthcare learning, build practical
+      software and push for systems that work better for neurospicy brains.
     </>
   ),
   actions: [
@@ -80,24 +82,24 @@ const home: Home = {
       icon: "linkedin",
     },
   ],
-focusAreas: [
-  {
-    title: "Simulation and immersive learning",
-    description:
-      "Realistic, inclusive learning that lets healthcare professionals practise the difficult stuff before it happens for real.",
-  },
-  {
-    title: "Practical software",
-    description:
-      "Useful tools for simulation, education and everyday work - usually built because the existing way was doing my head in.",
-  },
-  {
-    title: "Neuroinclusive systems",
-    description:
-      "Teaching, technology and working practices designed for different brains, not one mythical ‘normal’ person.",
-  },
-],
-credibility: ["Registered Paramedic", "Senior Lecturer", "Founder of SimHQ"],
+  focusAreas: [
+    {
+      title: "Simulation and immersive learning",
+      description:
+        "Realistic, inclusive learning that lets healthcare professionals practise the difficult stuff before it happens for real.",
+    },
+    {
+      title: "Practical software",
+      description:
+        "Useful tools for simulation, education and everyday work - usually built because the existing way was doing my head in.",
+    },
+    {
+      title: "Neuroinclusive systems",
+      description:
+        "Teaching, technology and working practices designed for different brains, not one mythical ‘normal’ person.",
+    },
+  ],
+  credibility: ["Registered Paramedic", "Senior Lecturer", "Founder of SimHQ"],
 };
 
 const about: About = {
@@ -192,11 +194,7 @@ const about: About = {
         title: "Healthcare simulation",
         description:
           "Designing and delivering scenarios, high-fidelity simulation, immersive experiences and simulation-based curricula that have a clear reason for existing.",
-        tags: [
-          { name: "Scenario design" },
-          { name: "Debriefing" },
-          { name: "Immersive learning" },
-        ],
+        tags: [{ name: "Scenario design" }, { name: "Debriefing" }, { name: "Immersive learning" }],
       },
       {
         title: "Inclusive education",
@@ -212,11 +210,7 @@ const about: About = {
         title: "Software and AI",
         description:
           "Web applications, workflow automation and sensible uses of generative AI - with slightly less enthusiasm for using AI where a normal button would do.",
-        tags: [
-          { name: "Product development" },
-          { name: "Automation" },
-          { name: "Generative AI" },
-        ],
+        tags: [{ name: "Product development" }, { name: "Automation" }, { name: "Generative AI" }],
       },
     ],
   },
