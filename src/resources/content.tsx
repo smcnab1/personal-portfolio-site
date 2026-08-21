@@ -362,28 +362,23 @@ const about: About = {
     institutions: [
       {
         name: "MSc Paramedic: Practice Development",
-        description:
-          "University of Cumbria · Sep 2024–Sep 2027 · Ongoing",
+        description: "University of Cumbria · Sep 2024–Sep 2027 · Ongoing",
       },
       {
         name: "PgCert Professional Academic Practice",
-        description:
-          "University of West London · Sep 2023–Aug 2024",
+        description: "University of West London · Sep 2023–Aug 2024",
       },
       {
         name: "DipHE Paramedic Practice",
-        description:
-          "University of Cumbria · Nov 2020–Dec 2021",
+        description: "University of Cumbria · Nov 2020–Dec 2021",
       },
       {
         name: "Fellow of the Higher Education Academy (FHEA)",
-        description:
-          "Higher Education Academy · Nov 2024-Present",
+        description: "Higher Education Academy · Nov 2024-Present",
       },
       {
         name: "Registered Paramedic",
-        description:
-          "Health and Care Professions Council · Feb 2022-Present",
+        description: "Health and Care Professions Council · Feb 2022-Present",
       },
       {
         name: "CS50: Introduction to Computer Science",
