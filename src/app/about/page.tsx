@@ -16,7 +16,7 @@ import styles from "@/components/about/about.module.scss";
 import TableOfContents from "@/components/about/TableOfContents";
 import { about, person, social } from "@/resources";
 import { generatePageMetadata } from "@/utils/metadata";
-import { groupExperiencesByCompany } from "./groupExperiences";
+import { groupExperiencesByCompany, keyExperiences } from "./groupExperiences";
 
 export async function generateMetadata() {
   return generatePageMetadata(about);
@@ -179,9 +179,7 @@ export default function About() {
                       {company}
                     </Heading>
                     <Column fillWidth gap="24">
-                      {roles.map((experience) => {
-                        const roleKey = `${experience.company}-${experience.role}-${experience.timeframe}`;
-
+                      {keyExperiences(roles).map(([roleKey, experience]) => {
                         return (
                           <Column key={roleKey} className={styles.roleItem} fillWidth>
                             <Row
