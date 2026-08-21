@@ -102,6 +102,7 @@ export default async function ProjectPage({
         <Media
           priority
           aspectRatio="16 / 9"
+          objectFit="contain"
           radius="l"
           border="neutral-alpha-weak"
           alt={`${post.metadata.title} project image`}
