@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-import * as cookie from "cookie";
+import { stringifySetCookie } from "cookie";
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
@@ -16,7 +16,9 @@ export async function POST(request: NextRequest) {
 
     response.headers.set(
       "Set-Cookie",
-      cookie.serialize("authToken", "authenticated", {
+      stringifySetCookie({
+        name: "authToken",
+        value: "authenticated",
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         maxAge: 60 * 60,

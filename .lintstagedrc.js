@@ -1,7 +1,4 @@
 module.exports = {
-  "*.{js,jsx,ts,tsx}": (filenames) => [
-    `biome check --write ${filenames.map((f) => `"${f}"`).join(" ")}`,
-    `biome format --write ${filenames.map((f) => `"${f}"`).join(" ")}`,
-  ],
-  "*.{json}": (filenames) => [`biome format --write ${filenames.map((f) => `"${f}"`).join(" ")}`],
+  "*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}": "biome check --write --no-errors-on-unmatched",
+  "*.{json,jsonc}": "biome format --write --no-errors-on-unmatched",
 };

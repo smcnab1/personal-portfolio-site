@@ -13,32 +13,39 @@ View the demo [here](https://demo.magic-portfolio.com).
 git clone https://github.com/once-ui-system/magic-portfolio.git
 ```
 
-**2. Install dependencies**
+**2. Use the supported runtime and package manager**
 ```
-npm install
-```
-
-**3. Run dev server**
-```
-npm run dev
+node --version # v24.19.0
+corepack enable
+corepack install
 ```
 
-**4. Edit config**
+**3. Install dependencies**
+```
+pnpm install --frozen-lockfile
+```
+
+**4. Run the development server**
+```
+pnpm dev
+```
+
+**5. Edit config**
 ```
 src/resources/once-ui.config.js
 ```
 
-**5. Edit content**
+**6. Edit content**
 ```
 src/resources/content.js
 ```
 
-**6. Create blog posts / projects**
+**7. Create blog posts / projects**
 ```
 Add a new .mdx file to src/app/blog/posts or src/app/work/projects
 ```
 
-Magic Portfolio was built with [Once UI](https://once-ui.com) for [Next.js](https://nextjs.org). It requires Node.js v18.17+.
+Magic Portfolio was built with [Once UI](https://once-ui.com) for [Next.js](https://nextjs.org). It requires Node.js 24.x and pnpm 11.22.0.
 
 ## Documentation
 
