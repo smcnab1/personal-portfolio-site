@@ -181,6 +181,18 @@ test("about profile sections preserve the approved curated content", async () =>
   );
 });
 
+test("work cover images preserve their full centred framing", async () => {
+  for (const relativePath of ["src/components/ProjectCard.tsx", "src/app/work/[slug]/page.tsx"]) {
+    const source = await readFile(new URL(relativePath, repositoryRoot), "utf8");
+
+    assert.equal(
+      [...source.matchAll(/objectFit="contain"/g)].length,
+      1,
+      `${relativePath} must render its project cover with objectFit=contain`,
+    );
+  }
+});
+
 test("all primary navigation routes have page implementations", async () => {
   for (const route of [
     "page.tsx",

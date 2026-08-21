@@ -58,6 +58,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             src={images[0]}
             alt={`${title} project image`}
             aspectRatio="16 / 9"
+            objectFit="contain"
             radius="l"
             border="neutral-alpha-weak"
             priority={priority}
