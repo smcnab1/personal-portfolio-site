@@ -17,7 +17,7 @@ import {
   ToastProvider,
   type TransitionStyle,
 } from "@once-ui-system/core";
-import { style, dataStyle } from "../resources";
+import { dataStyle, style } from "../resources";
 import { iconLibrary } from "../resources/icons";
 
 export function Providers({ children }: { children: React.ReactNode }) {

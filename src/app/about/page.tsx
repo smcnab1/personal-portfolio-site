@@ -169,8 +169,8 @@ export default function About() {
                 {about.work.title}
               </Heading>
               <Column fillWidth gap="l" marginBottom="40">
-                {about.work.experiences.map((experience, index) => (
-                  <Column key={`${experience.company}-${experience.role}-${index}`} fillWidth>
+                {about.work.experiences.map((experience) => (
+                  <Column key={`${experience.company}-${experience.role}`} fillWidth>
                     <Row fillWidth horizontal="between" vertical="end" marginBottom="4">
                       <Text variant="heading-strong-l">{experience.company}</Text>
                       <Text variant="heading-default-xs" onBackground="neutral-weak">
@@ -186,6 +186,7 @@ export default function About() {
                           <Text
                             as="li"
                             variant="body-default-m"
+                            // biome-ignore lint/suspicious/noArrayIndexKey: Achievement order identifies static content without stable IDs.
                             key={`${experience.company}-${index}`}
                           >
                             {achievement}
@@ -226,8 +227,8 @@ export default function About() {
                 {about.studies.title}
               </Heading>
               <Column fillWidth gap="l" marginBottom="40">
-                {about.studies.institutions.map((institution, index) => (
-                  <Column key={`${institution.name}-${index}`} fillWidth gap="4">
+                {about.studies.institutions.map((institution) => (
+                  <Column key={institution.name} fillWidth gap="4">
                     <Text variant="heading-strong-l">{institution.name}</Text>
                     <Text variant="heading-default-xs" onBackground="neutral-weak">
                       {institution.description}
@@ -244,16 +245,16 @@ export default function About() {
                 {about.technical.title}
               </Heading>
               <Column fillWidth gap="l">
-                {about.technical.skills.map((skill, index) => (
-                  <Column key={`${skill.title}-${index}`} fillWidth gap="4">
+                {about.technical.skills.map((skill) => (
+                  <Column key={skill.title} fillWidth gap="4">
                     <Text variant="heading-strong-l">{skill.title}</Text>
                     <Text variant="body-default-m" onBackground="neutral-weak">
                       {skill.description}
                     </Text>
                     {skill.tags && skill.tags.length > 0 && (
                       <Row wrap gap="8" paddingTop="8">
-                        {skill.tags.map((tag, tagIndex) => (
-                          <Tag key={`${skill.title}-${tagIndex}`} size="l" prefixIcon={tag.icon}>
+                        {skill.tags.map((tag) => (
+                          <Tag key={`${skill.title}-${tag.name}`} size="l" prefixIcon={tag.icon}>
                             {tag.name}
                           </Tag>
                         ))}

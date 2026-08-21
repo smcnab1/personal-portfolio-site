@@ -12,11 +12,15 @@ project and writing detail pages are stored as structured MDX.
 ## Development
 
 ```bash
-npm install
-npm run dev
+node --version # v24.19.0
+corepack enable
+corepack install
+pnpm install --frozen-lockfile
+pnpm dev
 ```
 
-The local site is available at `http://localhost:3000`.
+The project requires Node.js 24.x and pnpm 11.22.0. The local site is available at
+`http://localhost:3000`.
 
 ## Content model
 
@@ -31,11 +35,11 @@ frontmatter supports media, type, current status and verified external links.
 ## Quality checks
 
 ```bash
-npm run check
-npm run build
+pnpm check
+pnpm build
 ```
 
-`npm run check` verifies formatting, lint, TypeScript and portfolio content tests.
+`pnpm check` verifies formatting, lint, TypeScript and portfolio content tests.
 
 ## Public features
 
