@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import test from "node:test";
+import { groupExperiencesByCompany } from "../src/app/about/groupExperiences.ts";
 
 const repositoryRoot = new URL("../", import.meta.url);
 
@@ -97,4 +98,39 @@ test("all primary navigation routes have page implementations", async () => {
     const source = await readFile(file, "utf8");
     assert.ok(source.length > 0, join("src/app", route));
   }
+});
+
+test("experience grouping preserves organisation and role order without mutation", () => {
+  const firstOrganisationRole = Object.freeze({
+    company: "Organisation A",
+    role: "Role one",
+    timeframe: "2024–2025",
+  });
+  const otherOrganisationRole = Object.freeze({
+    company: "Organisation B",
+    role: "Only role",
+    timeframe: "Current",
+  });
+  const secondOrganisationRole = Object.freeze({
+    company: "Organisation A",
+    role: "Role two",
+    timeframe: "2025–present",
+  });
+  const experiences = Object.freeze([
+    firstOrganisationRole,
+    otherOrganisationRole,
+    secondOrganisationRole,
+  ]);
+
+  const groupedExperiences = groupExperiencesByCompany(experiences);
+
+  assert.deepEqual(groupedExperiences, [
+    ["Organisation A", [firstOrganisationRole, secondOrganisationRole]],
+    ["Organisation B", [otherOrganisationRole]],
+  ]);
+  assert.deepEqual(experiences, [
+    firstOrganisationRole,
+    otherOrganisationRole,
+    secondOrganisationRole,
+  ]);
 });
