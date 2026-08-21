@@ -139,31 +139,219 @@ const about: About = {
     title: "What I do",
     experiences: [
       {
-        company: "University of West London",
-        timeframe: "September 2025 to Present",
-        role: "Senior Lecturer in Simulation & Immersive Technologies",
-        achievements: [
-          "Leads the MSc Simulated Practice Education while teaching, designing curricula and supporting students across healthcare programmes.",
-          "Designs high-fidelity scenarios and immersive learning that prepare people for the difficult, messy and occasionally unpredictable reality of healthcare.",
-          "Leads and contributes to work around generative AI, inclusive education and the experiences of neurodivergent staff within the College of Nursing, Midwifery and Healthcare.",
-        ],
-      },
-      {
         company: "SimHQ",
-        timeframe: "Current",
-        role: "Founder and builder",
+        timeframe: "Jun 2026–present",
+        role: "Founder",
         achievements: [
-          "Building a modular platform to handle the behind-the-scenes work of healthcare simulation centres, including rooms, support and equipment.",
-          "Combines software development, product thinking and first-hand simulation experience to create tools based on how centres actually work - not how somebody assumes they work.",
+          "Building SimHQ to address operational challenges experienced by healthcare simulation teams.",
+          "Creates practical, user-focused software intended to help simulation teams work more efficiently.",
         ],
       },
       {
-        company: "Clinical and instructional practice",
-        timeframe: "2016–present",
-        role: "Registered paramedic, former ambulance clinician and military instructor",
+        company: "University of West London",
+        timeframe: "Sep 2025–present",
+        role: "Senior Lecturer - Simulation & Immersive Technologies",
         achievements: [
-          "Started out as a Combat Medical Technician, later completed a DipHE in Paramedic Practice and worked across ambulance-service and independent clinical settings.",
-          "That mix of clinical and instructional experience still shapes how I approach simulation, education and the software I build.",
+          "Provides academic leadership for simulation and immersive pedagogy across the College of Nursing, Midwifery & Healthcare, integrating high-fidelity simulation, VR and interactive methods across curricula.",
+          "Mentors academic and technical staff, supports inclusive neuro-affirming design and serves as the College's AI Lead for responsible adoption of AI in education and practice.",
+        ],
+      },
+      {
+        company: "University of West London",
+        timeframe: "Oct 2025–present",
+        role: "Network Lead - Neurodivergent Staff Network",
+        achievements: [
+          "Leads the Neurodivergent Staff Network, supporting an inclusive and psychologically safe culture for colleagues across the university.",
+          "Works with senior leadership, HR and EDI networks to influence policy, accessibility and neuro-affirming practice.",
+        ],
+      },
+      {
+        company: "University of West London",
+        timeframe: "Feb 2026–present",
+        role: "Advance UWL (HEA) Mentor & Assessor",
+        achievements: [
+          "Mentors colleagues developing evidence-based applications for Associate Fellowship and Fellowship of Advance HE.",
+          "Assesses written applications against the Professional Standards Framework as part of fellowship award panels.",
+        ],
+      },
+      {
+        company: "University of West London",
+        timeframe: "Feb 2026–present",
+        role: "Fitness to Practice Investigator",
+        achievements: [
+          "Conducts investigations into concerns about student conduct, behaviour and professional suitability under institutional regulations and professional standards.",
+          "Gathers and analyses evidence, interviews relevant parties and prepares reports with proportionate recommendations for panels.",
+        ],
+      },
+      {
+        company: "University of West London",
+        timeframe: "Sep 2025–present",
+        role: "Course Lead - MSc Simulated Practice Education",
+        achievements: [
+          "Leads the programme's design, validation, delivery, assessment strategy, quality assurance and continuing enhancement.",
+          "Oversees delivery across sites and simulation facilities, using immersive technologies, high-fidelity simulation and structured debriefing in teaching and assessment.",
+        ],
+      },
+      {
+        company: "University of West London",
+        timeframe: "Nov 2025–Mar 2026",
+        role: "Deputy / Acting Lead for Simulation & Immersive Technologies",
+        achievements: [
+          "Provided continuity of leadership for the Simulation Centre and associated services during the substantive lead's absence.",
+          "Oversaw day-to-day operations across sites, stakeholder communication, urgent resource decisions and risk management.",
+        ],
+      },
+      {
+        company: "University of West London",
+        timeframe: "Sep 2024–Sep 2025",
+        role: "Module Lead - Nursing Practice, Drug Calculation & Practice Hours",
+        achievements: [
+          "Led the academic delivery for final-year students across Children, Learning Disability, Mental Health and Adult Nursing pathways.",
+          "Designed and delivered module content using blended learning and digital technologies to support preparation for professional practice.",
+        ],
+      },
+      {
+        company: "University of West London",
+        timeframe: "Apr 2023–Sep 2025",
+        role: "Lecturer - Simulation & Immersive Technologies",
+        achievements: [
+          "Designed and delivered simulation-based learning across nursing, paramedic and other healthcare programmes.",
+          "Integrated high-fidelity simulation, virtual reality and interactive methods to connect theory with clinical practice.",
+        ],
+      },
+      {
+        company: "University of West London",
+        timeframe: "May 2023–Sep 2024",
+        role: "Module Lead - BNurs(Hons) Nursing Practice, Drug Calculation & Practice Hours",
+        achievements: [
+          "Led the module across all three years of the BNurs(Hons) programme and its four nursing pathways across multiple sites.",
+          "Designed and delivered module content using blended learning and digital technologies to support clinical and theoretical development.",
+        ],
+      },
+      {
+        company: "London Ambulance Service NHS Trust",
+        timeframe: "May 2022–Feb 2023",
+        role: "Armed Forces Network Service Champion",
+        achievements: [
+          "Provided support, guidance and advocacy for staff, service users and relatives from the Armed Forces community.",
+          "Acted as a point of contact for queries and signposted military personnel and veterans to relevant services and resources.",
+        ],
+      },
+      {
+        company: "London Ambulance Service NHS Trust",
+        timeframe: "Sep 2021–Feb 2023",
+        role: "End of Life Care Coordinator",
+        achievements: [
+          "Organised continuing professional development events focused on end-of-life care with clinical stakeholders.",
+          "Provided drop-in guidance and signposting for clinicians, connecting them with the service's end-of-life care team.",
+        ],
+      },
+      {
+        company: "London Ambulance Service NHS Trust",
+        timeframe: "Jul 2021–Feb 2023",
+        role: "Group Improvement and Staff Survey Lead",
+        achievements: [
+          "Worked between staff and management on local facilities, working-environment improvements and staff-wellbeing initiatives.",
+          "Coordinated monthly continuing professional development events, town halls and other staff-engagement opportunities.",
+        ],
+      },
+      {
+        company: "London Ambulance Service NHS Trust",
+        timeframe: "Jun 2020–Feb 2023",
+        role: "Emergency Medical Technician (EMT)",
+        achievements: [
+          "Responded to 999 emergencies and urgent-care cases in Central London alongside qualified clinicians and student paramedics.",
+          "Developed frontline experience in pre-hospital emergency care, patient assessment and clinical decision-making.",
+        ],
+      },
+      {
+        company: "London Ambulance Service NHS Trust",
+        timeframe: "Sep 2019–Feb 2023",
+        role: "SORT Operative (CBRN & MTA)",
+        achievements: [
+          "Trained to respond to mass-casualty incidents and contaminated-patient scenarios, including triage, decontamination and patient management in hazardous environments.",
+          "Deployed to marauding-terrorist-attack incidents across London to provide medical support in high-risk conditions.",
+        ],
+      },
+      {
+        company: "British Army",
+        timeframe: "Nov 2022–Apr 2024",
+        role: "Climate Assessor",
+        achievements: [
+          "Conducted Level 2 and Level 3 assessments of soldiers' and officers' lived experiences in Field Army units in the UK and overseas.",
+          "Facilitated focus groups and produced evidence-led reports with recommendations for senior leadership and organisational improvement.",
+        ],
+      },
+      {
+        company: "British Army",
+        timeframe: "Mar 2022–Apr 2024",
+        role: "Combat Medical Technician (Paramedic)",
+        achievements: [
+          "Practised as an autonomous clinician across Role 1, Role 2 and Role 3 medical facilities during exercises in the UK and overseas.",
+          "Delivered trauma care and developed training for other Combat Medical Technicians through virtual and in-person instruction.",
+        ],
+      },
+      {
+        company: "British Army",
+        timeframe: "Jan 2021–Apr 2024",
+        role: "Multiple Clinical Faculties",
+        achievements: [
+          "Provided specialist teaching and mentoring for military personnel across several clinical faculties.",
+          "Instructed on Battlefield Advanced Trauma Life Support, Emergency Management of Severe Burns and the CBRN Medic course.",
+        ],
+      },
+      {
+        company: "British Army",
+        timeframe: "Sep 2021–Dec 2023",
+        role: "Phase 1 (R) Instructor",
+        achievements: [
+          "Mentored and instructed reservists during basic training through virtual and in-person military and medical teaching.",
+          "Served as a Section Commander with responsibility for recruits' welfare, discipline and development.",
+        ],
+      },
+      {
+        company: "Self Employed",
+        timeframe: "Feb 2022–present",
+        role: "Registered Paramedic | Clinical Trainer | Tutor | Coach & Mentor",
+        achievements: [
+          "Provides registered paramedic care across events, film sets and other environments requiring medical support.",
+          "Delivers instruction and mentoring intended to support professional skills, knowledge and development.",
+        ],
+      },
+      {
+        company: "International Journal of Healthcare Simulation",
+        timeframe: "Jul 2024–present",
+        role: "Article Peer-Reviewer",
+        achievements: [
+          "Evaluates healthcare-simulation manuscripts, provides constructive feedback and makes recommendations for publication.",
+          "Works with editors and authors to support scientific rigour and the dissemination of relevant simulation research.",
+        ],
+      },
+      {
+        company: "British Burn Association",
+        timeframe: "Jan 2021–present",
+        role: "Clinical Faculty",
+        achievements: [
+          "Provides specialist instruction on assessment and management of severe burns as faculty for the Emergency Management of Severe Burns course.",
+          "Delivers hands-on training for military and NHS professionals working in high-pressure clinical environments.",
+        ],
+      },
+      {
+        company: "Brunel University of London",
+        timeframe: "Oct 2024–Feb 2025",
+        role: "Guest Lecturer",
+        achievements: [
+          "Delivered guest lectures on specialised healthcare topics using practical and professional examples.",
+          "Worked with faculty to align interactive sessions with course objectives and student learning needs.",
+        ],
+      },
+      {
+        company: "HCRG Care Group",
+        timeframe: "Jan 2023–Jun 2023",
+        role: "Statutory & Mandatory Trainer",
+        achievements: [
+          "Delivered statutory and mandatory training for clinical professionals to support competency and regulatory compliance.",
+          "Focused teaching on patient safety, core clinical skills and current professional requirements.",
         ],
       },
     ],
