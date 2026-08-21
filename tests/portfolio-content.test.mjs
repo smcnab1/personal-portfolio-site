@@ -136,6 +136,51 @@ test("work experience preserves the approved role inventory and format", async (
   );
 });
 
+test("about profile sections preserve the approved curated content", async () => {
+  const content = await readFile(new URL("src/resources/content.tsx", repositoryRoot), "utf8");
+  const studiesSource = content.match(/studies: \{([\s\S]*?)\n {2}\},\n {2}technical:/)?.[1];
+  const technicalSource = content.match(
+    /technical: \{([\s\S]*?)\n {2}\},\n {2}contributions:/,
+  )?.[1];
+  const contributionsSource = content.match(/contributions: \{([\s\S]*?)\n {2}\},\n\};/)?.[1];
+
+  assert.ok(studiesSource, "about.studies was not found");
+  assert.ok(technicalSource, "about.technical was not found");
+  assert.ok(contributionsSource, "about.contributions was not found");
+
+  assert.deepEqual(
+    [...studiesSource.matchAll(/^ {8}name: "([^"]+)"/gm)].map(([, name]) => name),
+    [
+      "MSc Paramedic: Practice Development",
+      "PgCert Professional Academic Practice",
+      "DipHE Paramedic Practice",
+      "Fellow of the Higher Education Academy (FHEA)",
+      "Registered Paramedic",
+      "CS50: Introduction to Computer Science",
+    ],
+  );
+  assert.deepEqual(
+    [...technicalSource.matchAll(/^ {8}title: "([^"]+)"/gm)].map(([, title]) => title),
+    [
+      "Healthcare simulation and immersive learning",
+      "Paramedic and emergency care",
+      "Higher education and neuroinclusion",
+      "Software, responsible AI and cybersecurity",
+    ],
+  );
+  assert.deepEqual(
+    [...contributionsSource.matchAll(/^ {8}title: "([^"]+)"/gm)].map(([, title]) => title),
+    [
+      "Responsible AI in professional education",
+      "Palliative and end-of-life care",
+      "Academic peer review",
+      "Neurodivergent staff advocacy",
+      "Fellowship mentoring and assessment",
+      "Scholarship and professional speaking",
+    ],
+  );
+});
+
 test("work cover images preserve their full centred framing", async () => {
   for (const relativePath of ["src/components/ProjectCard.tsx", "src/app/work/[slug]/page.tsx"]) {
     const source = await readFile(new URL(relativePath, repositoryRoot), "utf8");
