@@ -1,246 +1,137 @@
-import type { zones } from "tzdata";
 import type { IconName } from "@/resources/icons";
+import type { ReactNode } from "react";
+import type { zones } from "tzdata";
 
-/**
- * IANA time zone string (e.g., 'Asia/Calcutta', 'Europe/Vienna').
- * See: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
- */
-export type IANATimeZone = Extract<keyof typeof zones, string>; // Narrow to string keys for React usage
+export type IANATimeZone = Extract<keyof typeof zones, string>;
 
-/**
- * Represents a person featured in the portfolio.
- */
 export type Person = {
-  /** First name of the person */
   firstName: string;
-  /** Last name of the person */
   lastName: string;
-  /** The name you want to display, allows variations like nicknames */
   name: string;
-  /** Role or job title */
   role: string;
-  /** Path to avatar image */
   avatar: string;
-  /** Email address */
+  avatarAlt: string;
   email: string;
-  /** IANA time zone location */
-  location: IANATimeZone;
-  /** Languages spoken */
+  location: string;
+  timeZone: IANATimeZone;
   languages?: string[];
-  /**
-   * BCP 47 language tag for the HTML lang attribute (e.g., 'en', 'ja', 'zh-TW').
-   * Defaults to 'en' if not set.
-   * See: https://www.iana.org/assignments/language-subtag-registry
-   */
-  locale?: string;
+  locale: string;
+  url: string;
 };
 
-/**
- * Newsletter Section
- * @description The below information will be displayed on the Home page in Newsletter block
- */
-export type Newsletter = {
-  /** Whether to display the newsletter section */
-  display: boolean;
-  /** Title of the newsletter   */
-  title: React.ReactNode;
-  /** Description of the newsletter */
-  description: React.ReactNode;
-};
-
-/**
- * Social link configuration.
- */
-export type Social = Array<{
-  /** Name of the social platform */
+export type SocialLink = {
   name: string;
-  /** Icon for the social platform
-   * The icons are a part of "src/resources/icons.ts" file.
-   * If you need a different icon, import it there and reference it everywhere else
-   */
   icon: IconName;
-  /**
-   * The link to the social platform
-   *
-   * The link is not validated by code, make sure it's correct
-   */
   link: string;
-  /** Whether this social link is essential and should be displayed on the about page */
   essential?: boolean;
-}>;
+};
 
-/**
- * Base interface for page configuration with common properties.
- */
-export interface BasePageConfig {
-  /** Path to the page
-   *
-   * The path should be relative to the public directory
-   */
-  path: `/${string}` | string;
-  /** Label for navigation or display */
+export type Social = SocialLink[];
+
+export type NavigationItem = {
+  path: `/${string}` | "/";
   label: string;
-  /** Title of the page */
+  icon: IconName;
+};
+
+export interface BasePageConfig {
+  path: `/${string}` | "/";
+  label: string;
   title: string;
-  /** Description for SEO and metadata */
   description: string;
-  /** OG Image should be put inside `public/images` folder */
-  image?: `/images/${string}` | string;
+  image?: string;
 }
 
-/**
- * Home page configuration.
- */
 export interface Home extends BasePageConfig {
-  /** The image to be displayed in metadata
-   *
-   * The image needs to be put inside `/public/images/` directory
-   */
-  image: `/images/${string}` | string;
-  /** The headline of the home page */
-  headline: React.ReactNode;
-  /** Featured badge, which appears above the headline */
-  featured: {
-    display: boolean;
-    title: React.ReactNode;
+  image: string;
+  eyebrow: string;
+  headline: ReactNode;
+  subline: ReactNode;
+  actions: Array<{
+    label: string;
     href: string;
-  };
-  /** The sub text which appears below the headline */
-  subline: React.ReactNode;
+    primary?: boolean;
+  }>;
+  secondaryLinks: Array<{
+    label: string;
+    href: string;
+    icon?: IconName;
+  }>;
+  focusAreas: Array<{
+    title: string;
+    description: string;
+  }>;
+  credibility: string[];
 }
 
-/**
- * About page configuration.
- * @description Configuration for the About page, including sections for table of contents, avatar, calendar, introduction, work experience, studies, and technical skills.
- */
+type ContentSection<T> = {
+  display: boolean;
+  title: string;
+  items: T[];
+};
+
 export interface About extends BasePageConfig {
-  /** Table of contents configuration */
   tableOfContent: {
-    /** Whether to display the table of contents */
     display: boolean;
-    /** Whether to show sub-items in the table of contents */
     subItems: boolean;
   };
-  /** Avatar section configuration */
   avatar: {
-    /** Whether to display the avatar */
     display: boolean;
   };
-  /** Calendar section configuration */
-  calendar: {
-    /** Whether to display the calendar */
-    display: boolean;
-    /** Link to the calendar */
-    link: string;
-  };
-  /** Introduction section */
   intro: {
-    /** Whether to display the introduction */
     display: boolean;
-    /** Title of the introduction section */
     title: string;
-    /** Description of the introduction section */
-    description: React.ReactNode;
+    description: ReactNode;
   };
-  /** Work experience section */
   work: {
-    /** Whether to display work experience */
     display: boolean;
-    /** Title for the work experience section */
     title: string;
-    /** List of work experiences */
     experiences: Array<{
-      /** Company name */
       company: string;
-      /** Timeframe of employment */
       timeframe: string;
-      /** Role or job title */
       role: string;
-      /** Achievements at the company */
-      achievements: React.ReactNode[];
-      /** Images related to the experience */
+      achievements: ReactNode[];
       images?: Array<{
-        /** Image source path */
         src: string;
-        /** Image alt text */
         alt: string;
-        /** Image width ratio */
         width: number;
-        /** Image height ratio */
         height: number;
       }>;
     }>;
   };
-  /** Studies/education section */
   studies: {
-    /** Whether to display studies section */
     display: boolean;
-    /** Title for the studies section */
     title: string;
-    /** List of institutions attended */
     institutions: Array<{
-      /** Institution name */
       name: string;
-      /** Description of studies */
-      description: React.ReactNode;
+      description: ReactNode;
     }>;
   };
-  /** Technical skills section */
   technical: {
-    /** Whether to display technical skills section */
     display: boolean;
-    /** Title for the technical skills section */
     title: string;
-    /** List of technical skills */
     skills: Array<{
-      /** Skill title */
       title: string;
-      /** Skill description */
-      description?: React.ReactNode;
-      /** Skill tags */
+      description?: ReactNode;
       tags?: Array<{
         name: string;
-        icon?: string;
-      }>;
-      /** Images related to the skill */
-      images?: Array<{
-        /** Image source path */
-        src: string;
-        /** Image alt text */
-        alt: string;
-        /** Image width ratio */
-        width: number;
-        /** Image height ratio */
-        height: number;
+        icon?: IconName;
       }>;
     }>;
   };
+  contributions: ContentSection<{
+    title: string;
+    description: ReactNode;
+  }>;
 }
 
-/**
- * Blog page configuration.
- * @description Configuration for the Blog page, including metadata and navigation label.
- */
 export interface Blog extends BasePageConfig {}
 
-/**
- * Work/projects page configuration.
- * @description Configuration for the Work/Projects page, including metadata and navigation label.
- */
-export interface Work extends BasePageConfig {}
+export interface Work extends BasePageConfig {
+  introduction: string;
+}
 
-/**
- * Gallery page configuration.
- * @description Configuration for the Gallery page, including metadata, navigation label, and image list.
- */
-export interface Gallery extends BasePageConfig {
-  /** List of images in the gallery */
-  images: Array<{
-    /** Image source path */
-    src: string;
-    /** Image alt text */
-    alt: string;
-    /** Image orientation (horizontal/vertical) */
-    orientation: string;
-  }>;
+export interface Contact extends BasePageConfig {
+  introduction: string;
+  availability: string;
 }

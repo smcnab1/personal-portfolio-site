@@ -1,7 +1,8 @@
 "use client";
 
-import { Button, Row, Text, useToast } from "@once-ui-system/core";
+import { Row, Text, Button, useToast } from "@once-ui-system/core";
 import { socialSharing } from "@/resources";
+import type { IconName } from "@/resources/icons";
 
 interface ShareSectionProps {
   title: string;
@@ -10,7 +11,7 @@ interface ShareSectionProps {
 
 interface SocialPlatform {
   name: string;
-  icon: string;
+  icon: IconName;
   label: string;
   generateUrl: (title: string, url: string) => string;
 }
@@ -87,8 +88,7 @@ export function ShareSection({ title, url }: ShareSectionProps) {
         variant: "success",
         message: "Link copied to clipboard",
       });
-    } catch (err) {
-      console.error("Failed to copy: ", err);
+    } catch {
       addToast({
         variant: "danger",
         message: "Failed to copy link",
@@ -98,9 +98,11 @@ export function ShareSection({ title, url }: ShareSectionProps) {
 
   // Get enabled platforms
   const enabledPlatforms = Object.entries(socialSharing.platforms)
-    .filter(([_, enabled]) => enabled && _ !== "copyLink")
-    .map(([platformKey]) => ({ key: platformKey, ...socialPlatforms[platformKey] }))
-    .filter((platform) => platform.name); // Filter out platforms that don't exist in our definitions
+    .filter(([platformKey, enabled]) => enabled && platformKey !== "copyLink")
+    .flatMap(([platformKey]) => {
+      const platform = socialPlatforms[platformKey];
+      return platform ? [{ key: platformKey, ...platform }] : [];
+    });
 
   return (
     <Row fillWidth center gap="16" marginTop="32" marginBottom="16">
@@ -115,11 +117,22 @@ export function ShareSection({ title, url }: ShareSectionProps) {
             size="s"
             href={platform.generateUrl(title, url)}
             prefixIcon={platform.icon}
-          />
+            aria-label={`Share on ${platform.label}`}
+          >
+            {platform.label}
+          </Button>
         ))}
 
         {socialSharing.platforms.copyLink && (
-          <Button variant="secondary" size="s" onClick={handleCopy} prefixIcon="openLink" />
+          <Button
+            variant="secondary"
+            size="s"
+            onClick={handleCopy}
+            prefixIcon="openLink"
+            aria-label="Copy link"
+          >
+            Copy link
+          </Button>
         )}
       </Row>
     </Row>

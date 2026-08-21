@@ -3,9 +3,10 @@
 import { Card, Column, Media, Row, Avatar, Text } from "@once-ui-system/core";
 import { formatDate } from "@/utils/formatDate";
 import { person } from "@/resources";
+import type { ContentPost } from "@/utils/utils";
 
 interface PostProps {
-  post: any;
+  post: ContentPost;
   thumbnail: boolean;
   direction?: "row" | "column";
 }
@@ -33,7 +34,7 @@ export default function Post({ post, thumbnail, direction }: PostProps) {
           cursor="interactive"
           radius="l"
           src={post.metadata.image}
-          alt={"Thumbnail of " + post.metadata.title}
+          alt={`Thumbnail of ${post.metadata.title}`}
           aspectRatio="16 / 9"
         />
       )}
@@ -51,11 +52,18 @@ export default function Post({ post, thumbnail, direction }: PostProps) {
           <Text variant="heading-strong-l" wrap="balance">
             {post.metadata.title}
           </Text>
-          {post.metadata.tag && (
-            <Text variant="label-strong-s" onBackground="neutral-weak">
-              {post.metadata.tag}
-            </Text>
-          )}
+          <Row gap="8" wrap>
+            {post.metadata.tag && (
+              <Text variant="label-strong-s" onBackground="neutral-weak">
+                {post.metadata.tag}
+              </Text>
+            )}
+            {post.metadata.subtitle && (
+              <Text variant="label-default-s" onBackground="neutral-weak">
+                {post.metadata.subtitle}
+              </Text>
+            )}
+          </Row>
         </Column>
       </Row>
     </Card>

@@ -1,36 +1,41 @@
-import { Column, Heading, Meta, Schema } from "@once-ui-system/core";
-import { baseURL, about, person, work } from "@/resources";
+import { JsonLd } from "@/components";
 import { Projects } from "@/components/work/Projects";
+import { person, work } from "@/resources";
+import { generatePageMetadata } from "@/utils/metadata";
+import { Column, Heading, Text } from "@once-ui-system/core";
 
 export async function generateMetadata() {
-  return Meta.generate({
-    title: work.title,
-    description: work.description,
-    baseURL: baseURL,
-    image: `/api/og/generate?title=${encodeURIComponent(work.title)}`,
-    path: work.path,
-  });
+  return generatePageMetadata(work);
 }
 
-export default function Work() {
+export default function WorkPage() {
   return (
-    <Column maxWidth="m" paddingTop="24">
-      <Schema
-        as="webPage"
-        baseURL={baseURL}
-        path={work.path}
-        title={work.title}
-        description={work.description}
-        image={`/api/og/generate?title=${encodeURIComponent(work.title)}`}
-        author={{
-          name: person.name,
-          url: `${baseURL}${about.path}`,
-          image: `${baseURL}${person.avatar}`,
+    <Column maxWidth="m" paddingTop="24" gap="xl">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: work.title,
+          description: work.description,
+          url: `${person.url}${work.path}`,
+          author: {
+            "@type": "Person",
+            name: person.name,
+            url: person.url,
+          },
         }}
       />
-      <Heading marginBottom="l" variant="heading-strong-xl" align="center">
-        {work.title}
-      </Heading>
+      <Column maxWidth="s" gap="12" paddingX="l">
+        <Text variant="label-strong-s" onBackground="brand-weak">
+          Projects and programmes
+        </Text>
+        <Heading as="h1" variant="display-strong-l" wrap="balance">
+          {work.title}
+        </Heading>
+        <Text variant="heading-default-m" onBackground="neutral-weak" wrap="balance">
+          {work.introduction}
+        </Text>
+      </Column>
       <Projects />
     </Column>
   );

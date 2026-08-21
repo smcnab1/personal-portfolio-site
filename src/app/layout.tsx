@@ -2,28 +2,39 @@ import "@once-ui-system/core/css/styles.css";
 import "@once-ui-system/core/css/tokens.css";
 import "@/resources/custom.css";
 
+import { Footer, Header, JsonLd, Providers } from "@/components";
+import { dataStyle, effects, fonts, home, person, social, style } from "@/resources";
+import { generatePageMetadata } from "@/utils/metadata";
 import {
   Background,
   Column,
   Flex,
-  Meta,
   type Opacity,
   RevealFx,
   type SpacingToken,
 } from "@once-ui-system/core";
 import classNames from "classnames";
-import Script from "next/script";
-import { Footer, Header, Providers, RouteGuard } from "@/components";
-import { baseURL, dataStyle, effects, fonts, home, person, style } from "@/resources";
 
 export async function generateMetadata() {
-  return Meta.generate({
+  const metadata = generatePageMetadata({
     title: home.title,
     description: home.description,
-    baseURL: baseURL,
     path: home.path,
     image: home.image,
   });
+
+  return {
+    ...metadata,
+    title: {
+      default: home.title,
+      template: `%s — ${person.name}`,
+    },
+    manifest: "/manifest.webmanifest",
+    icons: {
+      icon: "/images/favicon.ico",
+      shortcut: "/images/favicon.ico",
+    },
+  };
 }
 
 export default async function RootLayout({
@@ -35,7 +46,7 @@ export default async function RootLayout({
     <Flex
       suppressHydrationWarning
       as="html"
-      lang={person.locale ?? "en"}
+      lang={person.locale}
       fillWidth
       className={classNames(
         fonts.heading.variable,
@@ -45,14 +56,15 @@ export default async function RootLayout({
       )}
     >
       <head>
-        <Script id="theme-init" strategy="beforeInteractive">
-          {`
+        <script
+          id="theme-init"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: The script is generated only from trusted local theme configuration.
+          dangerouslySetInnerHTML={{
+            __html: `
               (function() {
                 try {
                   const root = document.documentElement;
                   const defaultTheme = 'system';
-                  
-                  // Set defaults from config
                   const config = ${JSON.stringify({
                     brand: style.brand,
                     accent: style.accent,
@@ -65,40 +77,31 @@ export default async function RootLayout({
                     scaling: style.scaling,
                     "viz-style": dataStyle.variant,
                   })};
-                  
-                  // Apply default values
+
                   Object.entries(config).forEach(([key, value]) => {
                     root.setAttribute('data-' + key, value);
                   });
-                  
-                  // Resolve theme
+
                   const resolveTheme = (themeValue) => {
-                    if (!themeValue || themeValue === 'system') {
+                    if (!themeValue || themeValue === defaultTheme) {
                       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
                     }
                     return themeValue;
                   };
-                  
-                  // Apply saved theme
-                  const savedTheme = localStorage.getItem('data-theme');
-                  const resolvedTheme = resolveTheme(savedTheme);
-                  root.setAttribute('data-theme', resolvedTheme);
-                  
-                  // Apply any saved style overrides
-                  const styleKeys = Object.keys(config);
-                  styleKeys.forEach(key => {
+
+                  root.setAttribute('data-theme', resolveTheme(localStorage.getItem('data-theme')));
+
+                  Object.keys(config).forEach((key) => {
                     const value = localStorage.getItem('data-' + key);
-                    if (value) {
-                      root.setAttribute('data-' + key, value);
-                    }
+                    if (value) root.setAttribute('data-' + key, value);
                   });
-                } catch (e) {
-                  console.error('Failed to initialize theme:', e);
+                } catch {
                   document.documentElement.setAttribute('data-theme', 'dark');
                 }
               })();
-            `}
-        </Script>
+            `,
+          }}
+        />
       </head>
       <Providers>
         <Column
@@ -110,6 +113,27 @@ export default async function RootLayout({
           padding="0"
           horizontal="center"
         >
+          <a className="skip-link" href="#main-content">
+            Skip to main content
+          </a>
+          <JsonLd
+            data={{
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: person.name,
+              url: person.url,
+              image: `${person.url}${person.avatar}`,
+              email: `mailto:${person.email}`,
+              jobTitle: person.role,
+              homeLocation: {
+                "@type": "Place",
+                name: person.location,
+              },
+              sameAs: social
+                .filter((item) => item.link.startsWith("https://"))
+                .map((item) => item.link),
+            }}
+          />
           <RevealFx fill position="absolute">
             <Background
               mask={{
@@ -154,9 +178,18 @@ export default async function RootLayout({
           </RevealFx>
           <Flex fillWidth minHeight="16" s={{ hide: true }} />
           <Header />
-          <Flex zIndex={0} fillWidth padding="l" horizontal="center" flex={1}>
+          <Flex
+            as="main"
+            id="main-content"
+            tabIndex={-1}
+            zIndex={0}
+            fillWidth
+            padding="l"
+            horizontal="center"
+            flex={1}
+          >
             <Flex horizontal="center" fillWidth minHeight="0">
-              <RouteGuard>{children}</RouteGuard>
+              {children}
             </Flex>
           </Flex>
           <Footer />

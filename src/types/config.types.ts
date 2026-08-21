@@ -23,16 +23,6 @@ export type DisplayConfig = {
 };
 
 /**
- * Route configuration for enabled/disabled routes.
- */
-export type RoutesConfig = Record<`/${string}`, boolean>;
-
-/**
- * Protected route configuration.
- */
-export type ProtectedRoutesConfig = Record<`/${string}`, boolean>;
-
-/**
  * Font configuration for each variant.
  */
 export type FontsConfig = {
@@ -120,34 +110,6 @@ export type EffectsConfig = {
 };
 
 /**
- * Mailchimp configuration for newsletter forms.
- */
-export type MailchimpConfig = {
-  action: string;
-  effects: EffectsConfig;
-};
-
-/**
- * Schema data for SEO/meta tags.
- */
-export type SchemaConfig = {
-  logo: string;
-  type: string;
-  name: string;
-  description: string;
-  email: string;
-};
-
-/**
- * Social links for organization.
- */
-export type SameAsConfig = {
-  threads: string;
-  linkedin: string;
-  discord: string;
-};
-
-/**
  * Social sharing configuration for blog posts.
  */
 export type SocialSharingConfig = {
@@ -170,14 +132,9 @@ export type SocialSharingConfig = {
  */
 export type OnceUIConfig = {
   display: DisplayConfig;
-  mailchimp: MailchimpConfig;
-  routes: RoutesConfig;
-  protectedRoutes: ProtectedRoutesConfig;
   baseURL: string;
   fonts: FontsConfig;
   style: StyleConfig;
-  schema: SchemaConfig;
-  sameAs: SameAsConfig;
   socialSharing: SocialSharingConfig;
   effects: EffectsConfig;
   dataStyle: DataStyleConfig;
