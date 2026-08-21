@@ -6,22 +6,26 @@ import {
   Icon,
   IconButton,
   Media,
+  Row,
   Tag,
   Text,
-  Row,
 } from "@once-ui-system/core";
-import { about, person, social } from "@/resources";
-import TableOfContents from "@/components/about/TableOfContents";
-import styles from "@/components/about/about.module.scss";
 import React from "react";
-import { generatePageMetadata } from "@/utils/metadata";
 import { JsonLd } from "@/components";
+import styles from "@/components/about/about.module.scss";
+import TableOfContents from "@/components/about/TableOfContents";
+import { about, person, social } from "@/resources";
+import { generatePageMetadata } from "@/utils/metadata";
+import { groupExperiencesByCompany } from "./groupExperiences";
 
 export async function generateMetadata() {
   return generatePageMetadata(about);
 }
 
+type Experience = (typeof about.work.experiences)[number];
+
 export default function About() {
+  const groupedExperiences = groupExperiencesByCompany<Experience>(about.work.experiences);
   const structure = [
     {
       id: "introduction",
@@ -169,52 +173,70 @@ export default function About() {
                 {about.work.title}
               </Heading>
               <Column fillWidth gap="l" marginBottom="40">
-                {about.work.experiences.map((experience) => (
-                  <Column key={`${experience.company}-${experience.role}`} fillWidth>
-                    <Row fillWidth horizontal="between" vertical="end" marginBottom="4">
-                      <Text variant="heading-strong-l">{experience.company}</Text>
-                      <Text variant="heading-default-xs" onBackground="neutral-weak">
-                        {experience.timeframe}
-                      </Text>
-                    </Row>
-                    <Text variant="body-default-s" onBackground="brand-weak" marginBottom="m">
-                      {experience.role}
-                    </Text>
-                    <Column as="ul" gap="16">
-                      {experience.achievements.map(
-                        (achievement: React.ReactNode, index: number) => (
-                          <Text
-                            as="li"
-                            variant="body-default-m"
-                            // biome-ignore lint/suspicious/noArrayIndexKey: Achievement order identifies static content without stable IDs.
-                            key={`${experience.company}-${index}`}
-                          >
-                            {achievement}
-                          </Text>
-                        ),
-                      )}
+                {groupedExperiences.map(([company, roles]) => (
+                  <Column key={company} fillWidth gap="m">
+                    <Heading as="h3" variant="heading-strong-l">
+                      {company}
+                    </Heading>
+                    <Column fillWidth gap="24">
+                      {roles.map((experience) => {
+                        const roleKey = `${experience.company}-${experience.role}-${experience.timeframe}`;
+
+                        return (
+                          <Column key={roleKey} className={styles.roleItem} fillWidth>
+                            <Row
+                              className={styles.roleHeader}
+                              fillWidth
+                              horizontal="between"
+                              vertical="end"
+                              gap="12"
+                              wrap
+                              marginBottom="m"
+                            >
+                              <Text variant="heading-strong-m" onBackground="brand-weak">
+                                {experience.role}
+                              </Text>
+                              <Text variant="heading-default-xs" onBackground="neutral-weak">
+                                {experience.timeframe}
+                              </Text>
+                            </Row>
+                            <Column as="ul" gap="16">
+                              {experience.achievements.map((achievement, index) => (
+                                <Text
+                                  as="li"
+                                  variant="body-default-m"
+                                  // biome-ignore lint/suspicious/noArrayIndexKey: Achievement order identifies static content without stable IDs.
+                                  key={`${roleKey}-achievement-${index}`}
+                                >
+                                  {achievement}
+                                </Text>
+                              ))}
+                            </Column>
+                            {experience.images && experience.images.length > 0 && (
+                              <Row fillWidth paddingTop="m" gap="12" wrap>
+                                {experience.images.map((image) => (
+                                  <Row
+                                    key={`${roleKey}-${image.src}`}
+                                    border="neutral-medium"
+                                    radius="m"
+                                    minWidth={image.width}
+                                    height={image.height}
+                                  >
+                                    <Media
+                                      enlarge
+                                      radius="m"
+                                      sizes={image.width.toString()}
+                                      alt={image.alt}
+                                      src={image.src}
+                                    />
+                                  </Row>
+                                ))}
+                              </Row>
+                            )}
+                          </Column>
+                        );
+                      })}
                     </Column>
-                    {experience.images && experience.images.length > 0 && (
-                      <Row fillWidth paddingTop="m" paddingLeft="40" gap="12" wrap>
-                        {experience.images.map((image) => (
-                          <Row
-                            key={image.src}
-                            border="neutral-medium"
-                            radius="m"
-                            minWidth={image.width}
-                            height={image.height}
-                          >
-                            <Media
-                              enlarge
-                              radius="m"
-                              sizes={image.width.toString()}
-                              alt={image.alt}
-                              src={image.src}
-                            />
-                          </Row>
-                        ))}
-                      </Row>
-                    )}
                   </Column>
                 ))}
               </Column>
