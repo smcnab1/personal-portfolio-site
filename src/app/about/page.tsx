@@ -50,7 +50,7 @@ export default function About() {
     },
   ];
   return (
-    <Column maxWidth="m">
+    <Column maxWidth="s">
       <JsonLd
         data={{
           "@context": "https://schema.org",

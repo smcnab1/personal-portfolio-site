@@ -6,10 +6,10 @@ const person: Person = {
   lastName: "McNab",
   name: "Sam McNab",
   role: "Paramedic, educator and software builder",
-  avatar: "/images/avatar-sam-mcnab.webp",
-  avatarAlt: "Sam McNab wearing a blue shirt",
+  avatar: "/images/my-avatar.png",
+  avatarAlt: "Sam McNab as a genmoji",
   email: "sam@sammcnab.co.uk",
-  location: "High Wycombe, Buckinghamshire, UK",
+  location: "Buckinghamshire, UK",
   timeZone: "Europe/London",
   languages: ["English"],
   locale: "en-GB",
@@ -55,16 +55,15 @@ const home: Home = {
   path: "/",
   image: person.avatar,
   label: "Home",
-  title: "Sam McNab — Paramedic, educator and software builder",
+  title: "Sam McNab | Paramedic, educator and software builder",
   description:
     "Sam McNab connects clinical practice, healthcare simulation, inclusive education and practical software development.",
-  eyebrow: "Paramedic · Educator · Software Builder",
+  eyebrow: "Paramedic · Educator · Software Builder · Cybersecurity",
   headline: <>I build better ways to learn, simulate and work.</>,
   subline: (
     <>
-      I&apos;m Sam McNab — a registered paramedic and Senior Lecturer in Simulation &amp; Immersive
-      Technologies. I design realistic healthcare learning, build practical software, and advocate
-      for systems that work better for neurodivergent people.
+      I&apos;m <strong>Sam</strong>, a registered <strong>paramedic</strong>, <strong>simulation lecturer</strong> and serial fixer of things that probably shouldn&apos;t have been broken in the first place. 
+      I create immersive healthcare learning, build practical software and push for systems that work better for neurospicy brains.
     </>
   ),
   actions: [
@@ -81,24 +80,24 @@ const home: Home = {
       icon: "linkedin",
     },
   ],
-  focusAreas: [
-    {
-      title: "Simulation and immersive learning",
-      description:
-        "Realistic, inclusive learning that helps healthcare professionals rehearse difficult work safely.",
-    },
-    {
-      title: "Practical software",
-      description:
-        "Tools that remove friction from simulation operations, education and everyday workflows.",
-    },
-    {
-      title: "Neuroinclusive systems",
-      description:
-        "Teaching, technology and working practices designed with different ways of thinking in mind.",
-    },
-  ],
-  credibility: ["Registered paramedic", "Senior Lecturer", "Founder of SimHQ"],
+focusAreas: [
+  {
+    title: "Simulation and immersive learning",
+    description:
+      "Realistic, inclusive learning that lets healthcare professionals practise the difficult stuff before it happens for real.",
+  },
+  {
+    title: "Practical software",
+    description:
+      "Useful tools for simulation, education and everyday work - usually built because the existing way was doing my head in.",
+  },
+  {
+    title: "Neuroinclusive systems",
+    description:
+      "Teaching, technology and working practices designed for different brains, not one mythical ‘normal’ person.",
+  },
+],
+credibility: ["Registered Paramedic", "Senior Lecturer", "Founder of SimHQ"],
 };
 
 const about: About = {
@@ -106,7 +105,7 @@ const about: About = {
   label: "About",
   title: "About Sam McNab",
   description:
-    "Sam McNab is a registered paramedic, simulation educator, neurodiversity advocate and software builder based in Buckinghamshire.",
+    "Sam McNab is a registered paramedic, simulation educator and software builder from Buckinghamshire, working across immersive learning, healthcare technology and neuroinclusion.",
   tableOfContent: {
     display: true,
     subItems: false,
@@ -116,17 +115,18 @@ const about: About = {
   },
   intro: {
     display: true,
-    title: "Introduction",
+    title: "A bit about me",
     description: (
       <>
         <Text as="p">
-          I work where clinical practice, higher education and technology meet. My starting point is
-          usually the same: understand the real problem, reduce unnecessary friction, and build
-          something people can use.
+          I work somewhere between clinical practice, higher education and technology - usually
+          trying to fix something that is more complicated than it needs to be. I start by finding
+          the actual problem, removing the unnecessary faff and building something people can
+          genuinely use.
         </Text>
         <Text as="p">
-          Today, that means leading simulation and immersive learning at the University of West
-          London, building SimHQ, contributing to work around healthcare AI, and advocating for
+          These days, that includes leading simulation and immersive learning at the University of
+          West London, building SimHQ, contributing to work around healthcare AI and advocating for
           neurodivergent staff and students.
         </Text>
       </>
@@ -134,16 +134,16 @@ const about: About = {
   },
   work: {
     display: true,
-    title: "Selected roles",
+    title: "What I do",
     experiences: [
       {
         company: "University of West London",
-        timeframe: "2025–present",
+        timeframe: "2025 to present",
         role: "Senior Lecturer in Simulation & Immersive Technologies",
         achievements: [
-          "Course leadership for the MSc Simulated Practice Education, alongside teaching, curriculum design and personal tutoring across healthcare programmes.",
-          "Designs high-fidelity, scenario-based and immersive learning for undergraduate and postgraduate learners.",
-          "Leads and contributes to work around generative AI, inclusive education and neurodivergent staff experience within the College of Nursing, Midwifery and Healthcare.",
+          "Leads the MSc Simulated Practice Education while teaching, designing curricula and supporting students across healthcare programmes.",
+          "Designs high-fidelity scenarios and immersive learning that prepare people for the difficult, messy and occasionally unpredictable reality of healthcare.",
+          "Leads and contributes to work around generative AI, inclusive education and the experiences of neurodivergent staff within the College of Nursing, Midwifery and Healthcare.",
         ],
       },
       {
@@ -151,8 +151,8 @@ const about: About = {
         timeframe: "Current",
         role: "Founder and builder",
         achievements: [
-          "Building a modular platform for the practical work behind healthcare simulation centres, including room operations, support and asset workflows.",
-          "Combines product thinking, software development and first-hand simulation experience to keep the tools grounded in real operational needs.",
+          "Building a modular platform to handle the behind-the-scenes work of healthcare simulation centres, including rooms, support and equipment.",
+          "Combines software development, product thinking and first-hand simulation experience to create tools based on how centres actually work - not how somebody assumes they work.",
         ],
       },
       {
@@ -160,23 +160,23 @@ const about: About = {
         timeframe: "2016–present",
         role: "Registered paramedic, former ambulance clinician and military instructor",
         achievements: [
-          "Trained as a Combat Medical Technician before completing a DipHE in Paramedic Practice and working in ambulance-service and independent clinical settings.",
-          "Clinical practice and instructional experience continue to shape how I design simulation, software and education.",
+          "Started out as a Combat Medical Technician, later completed a DipHE in Paramedic Practice and worked across ambulance-service and independent clinical settings.",
+          "That mix of clinical and instructional experience still shapes how I approach simulation, education and the software I build.",
         ],
       },
     ],
   },
   studies: {
     display: true,
-    title: "Education",
+    title: "The qualification bit",
     institutions: [
       {
         name: "MSc Paramedic: Practice Development",
-        description: "Current postgraduate study.",
+        description: "Current postgraduate study - because apparently I needed another project.",
       },
       {
         name: "Professional Academic Practice",
-        description: "Postgraduate study at the University of West London.",
+        description: "Postgraduate study completed at the University of West London.",
       },
       {
         name: "DipHE Paramedic Practice",
@@ -186,18 +186,22 @@ const about: About = {
   },
   technical: {
     display: true,
-    title: "Areas of practice",
+    title: "Things I know a bit about",
     skills: [
       {
         title: "Healthcare simulation",
         description:
-          "Scenario design, facilitation, high-fidelity simulation, immersive technologies and simulation-based curriculum design.",
-        tags: [{ name: "Scenario design" }, { name: "Debriefing" }, { name: "Immersive learning" }],
+          "Designing and delivering scenarios, high-fidelity simulation, immersive experiences and simulation-based curricula that have a clear reason for existing.",
+        tags: [
+          { name: "Scenario design" },
+          { name: "Debriefing" },
+          { name: "Immersive learning" },
+        ],
       },
       {
         title: "Inclusive education",
         description:
-          "Neuro-affirming teaching, accessible learning design and practical changes that make systems easier to navigate.",
+          "Neuro-affirming teaching, accessible learning design and practical changes that make education and work easier to navigate.",
         tags: [
           { name: "Neurodiversity" },
           { name: "Universal design" },
@@ -207,28 +211,33 @@ const about: About = {
       {
         title: "Software and AI",
         description:
-          "Web applications, workflow automation and careful use of generative AI for education and simulation.",
-        tags: [{ name: "Product development" }, { name: "Automation" }, { name: "Generative AI" }],
+          "Web applications, workflow automation and sensible uses of generative AI - with slightly less enthusiasm for using AI where a normal button would do.",
+        tags: [
+          { name: "Product development" },
+          { name: "Automation" },
+          { name: "Generative AI" },
+        ],
       },
     ],
   },
   contributions: {
     display: true,
-    title: "Professional contributions",
+    title: "Elsewhere",
     items: [
       {
         title: "Healthcare AI",
-        description: "Member of the HCPC AI Expert Panel and AI lead within CNMH.",
+        description:
+          "Member of the HCPC AI Expert Panel and AI lead within the College of Nursing, Midwifery and Healthcare.",
       },
       {
         title: "Professional communities",
         description:
-          "Contributions to College of Paramedics and ASPiH special-interest groups, peer review, and simulation education communities.",
+          "Contributes to College of Paramedics and ASPiH special-interest groups, peer review and the wider simulation education community.",
       },
       {
         title: "Academic development",
         description:
-          "Advance HE mentoring and assessment, with a focus on reflective and inclusive practice.",
+          "Advance HE mentoring and assessment, focused on reflective, inclusive practice that remains useful once the paperwork is finished.",
       },
     ],
   },
@@ -237,31 +246,31 @@ const about: About = {
 const blog: Blog = {
   path: "/blog",
   label: "Writing",
-  title: "Writing and publications",
+  title: "Things I’ve written",
   description:
-    "Selected publications, presentations and notes by Sam McNab on simulation, AI and neuroinclusive education.",
+    "Publications, presentations and occasional thoughts from Sam McNab on simulation, healthcare AI and neuroinclusive education.",
 };
 
 const work: Work = {
   path: "/work",
   label: "Work",
-  title: "Selected work",
+  title: "Things I’ve worked on",
   description:
-    "Selected projects and programmes spanning healthcare simulation, inclusive education and practical software.",
+    "Projects and programmes spanning healthcare simulation, inclusive education and practical software.",
   introduction:
-    "A small set of projects that show how I connect clinical practice, education and technology. Where formal outcome data is not public, I describe the work and its current status plainly.",
+    "A selection of work connecting clinical practice, education and technology. Where formal results are not publicly available, I explain what I built, why I built it and where it is now - without inventing impressive-looking numbers.",
 };
 
 const contact: Contact = {
   path: "/contact",
   label: "Contact",
-  title: "Contact Sam McNab",
+  title: "Get in touch",
   description:
     "Contact Sam McNab about healthcare simulation, education, speaking, collaboration or software projects.",
   introduction:
-    "The simplest way to reach me is by email. You can also find my current work and professional profiles below.",
+    "Email is the simplest way to reach me. You can also find my current work and professional profiles below.",
   availability:
-    "I am happy to hear about thoughtful collaborations across healthcare simulation, education, neuroinclusion and practical software.",
+    "I’m open to interesting, useful collaborations across healthcare simulation, education, neuroinclusion and practical software.",
 };
 
 export { person, social, navigation, home, about, blog, work, contact };
