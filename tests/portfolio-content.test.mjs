@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import test from "node:test";
-import { groupExperiencesByCompany } from "../src/app/about/groupExperiences.ts";
+import { groupExperiencesByCompany, keyExperiences } from "../src/app/about/groupExperiences.ts";
 
 const repositoryRoot = new URL("../", import.meta.url);
 
@@ -133,4 +133,18 @@ test("experience grouping preserves organisation and role order without mutation
     otherOrganisationRole,
     secondOrganisationRole,
   ]);
+});
+
+test("experience keys remain unique when role metadata is duplicated", () => {
+  const experience = {
+    company: "Organisation A",
+    role: "Repeated role",
+    timeframe: "2025–present",
+  };
+
+  const [[firstKey], [secondKey]] = keyExperiences([experience, experience]);
+
+  assert.equal(firstKey, "Organisation A-Repeated role-2025–present");
+  assert.equal(secondKey, "Organisation A-Repeated role-2025–present-1");
+  assert.notEqual(firstKey, secondKey);
 });
