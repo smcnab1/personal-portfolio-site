@@ -140,7 +140,7 @@ const about: About = {
     experiences: [
       {
         company: "University of West London",
-        timeframe: "2025 to present",
+        timeframe: "September 2025 to Present",
         role: "Senior Lecturer in Simulation & Immersive Technologies",
         achievements: [
           "Leads the MSc Simulated Practice Education while teaching, designing curricula and supporting students across healthcare programmes.",
