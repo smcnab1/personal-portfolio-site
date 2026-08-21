@@ -363,32 +363,32 @@ const about: About = {
       {
         name: "MSc Paramedic: Practice Development",
         description:
-          "University of Cumbria · Sep 2024–Sep 2027 · Ongoing postgraduate study in clinical reasoning, evidence-based paramedic practice and transformational leadership.",
+          "University of Cumbria · Sep 2024–Sep 2027 · Ongoing",
       },
       {
         name: "PgCert Professional Academic Practice",
         description:
-          "University of West London · Sep 2023–Aug 2024 · Postgraduate study in higher education pedagogy, curriculum design, assessment and research-informed teaching.",
+          "University of West London · Sep 2023–Aug 2024",
       },
       {
         name: "DipHE Paramedic Practice",
         description:
-          "University of Cumbria · Nov 2020–Dec 2021 · Completed with distinction, providing the clinical and academic foundations for registered paramedic practice.",
+          "University of Cumbria · Nov 2020–Dec 2021",
       },
       {
         name: "Fellow of the Higher Education Academy (FHEA)",
         description:
-          "Higher Education Academy · Recognised since Nov 2024 for teaching and learning practice in higher education.",
+          "Higher Education Academy · Nov 2024-Present",
       },
       {
         name: "Registered Paramedic",
         description:
-          "Health and Care Professions Council · Registered since Feb 2022, underpinning current clinical practice.",
+          "Health and Care Professions Council · Feb 2022-Present",
       },
       {
         name: "CS50: Introduction to Computer Science",
         description:
-          "Harvard John A. Paulson School of Engineering and Applied Sciences · Dec 2023–Feb 2024 · Foundation in algorithms, data structures, software engineering and web development.",
+          "Harvard John A. Paulson School of Engineering and Applied Sciences · Dec 2023–Feb 2024",
       },
     ],
   },
