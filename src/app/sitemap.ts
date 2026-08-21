@@ -1,25 +1,27 @@
+import { baseURL, navigation } from "@/resources";
 import { getPosts } from "@/utils/utils";
-import { baseURL, routes as routesConfig } from "@/resources";
+import type { MetadataRoute } from "next";
 
-export default async function sitemap() {
-  const blogs = getPosts(["src", "app", "blog", "posts"]).map((post) => ({
+export default function sitemap(): MetadataRoute.Sitemap {
+  const writing = getPosts("blog").map((post) => ({
     url: `${baseURL}/blog/${post.slug}`,
     lastModified: post.metadata.publishedAt,
+    changeFrequency: "yearly" as const,
+    priority: 0.6,
   }));
 
-  const works = getPosts(["src", "app", "work", "projects"]).map((post) => ({
+  const projects = getPosts("work").map((post) => ({
     url: `${baseURL}/work/${post.slug}`,
     lastModified: post.metadata.publishedAt,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
   }));
 
-  const activeRoutes = Object.keys(routesConfig).filter(
-    (route) => routesConfig[route as keyof typeof routesConfig],
-  );
-
-  const routes = activeRoutes.map((route) => ({
-    url: `${baseURL}${route !== "/" ? route : ""}`,
-    lastModified: new Date().toISOString().split("T")[0],
+  const routes = navigation.map((item) => ({
+    url: `${baseURL}${item.path === "/" ? "" : item.path}`,
+    changeFrequency: item.path === "/" ? ("weekly" as const) : ("monthly" as const),
+    priority: item.path === "/" ? 1 : 0.8,
   }));
 
-  return [...routes, ...blogs, ...works];
+  return [...routes, ...writing, ...projects];
 }
