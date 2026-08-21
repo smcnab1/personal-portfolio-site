@@ -86,6 +86,56 @@ test("authoritative public links are configured once", async () => {
   }
 });
 
+test("work experience preserves the approved role inventory and format", async () => {
+  const content = await readFile(new URL("src/resources/content.tsx", repositoryRoot), "utf8");
+  const experiencesSource = content.match(
+    /experiences: \[([\s\S]*?)\n {4}\],\n {2}},\n {2}studies:/,
+  )?.[1];
+
+  assert.ok(experiencesSource, "about.work.experiences was not found");
+
+  const experiences = [
+    ...experiencesSource.matchAll(
+      /\{\s+company: "([^"]+)",\s+timeframe: "([^"]+)",\s+role: "([^"]+)",\s+achievements: \[([\s\S]*?)\s+\],\s+\},/g,
+    ),
+  ].map(([, company, timeframe, role, achievements]) => ({
+    company,
+    timeframe,
+    role,
+    achievementCount: [...achievements.matchAll(/^\s+"/gm)].length,
+  }));
+  const timeframePattern =
+    /^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4}–(?:present|(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4})$/;
+
+  assert.equal(experiences.length, 24);
+  assert.ok(experiences.every(({ timeframe }) => timeframePattern.test(timeframe)));
+  assert.ok(
+    experiences.every(({ achievementCount }) => achievementCount >= 1 && achievementCount <= 2),
+  );
+  assert.deepEqual(
+    experiences
+      .filter(({ company }) => company === "University of West London")
+      .map(({ role }) => role),
+    [
+      "Senior Lecturer - Simulation & Immersive Technologies",
+      "Network Lead - Neurodivergent Staff Network",
+      "Advance UWL (HEA) Mentor & Assessor",
+      "Fitness to Practice Investigator",
+      "Course Lead - MSc Simulated Practice Education",
+      "Deputy / Acting Lead for Simulation & Immersive Technologies",
+      "Module Lead - Nursing Practice, Drug Calculation & Practice Hours",
+      "Lecturer - Simulation & Immersive Technologies",
+      "Module Lead - BNurs(Hons) Nursing Practice, Drug Calculation & Practice Hours",
+    ],
+  );
+  assert.ok(
+    experiences.some(
+      ({ company, role, timeframe }) =>
+        company === "SimHQ" && role === "Founder" && timeframe === "Jun 2026–present",
+    ),
+  );
+});
+
 test("all primary navigation routes have page implementations", async () => {
   for (const route of [
     "page.tsx",
